@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\View\View;
-use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -18,8 +19,9 @@ class RegisterController extends Controller
 	{
 		$user = User::create($request->validated());
 
-		auth()->login($user);
+		event(new Registered($user));
 
-		return redirect('/')->with('success', 'Account successfully registered.');
+		auth()->login($user);
+		return redirect()->route('verification.notice');
 	}
 }

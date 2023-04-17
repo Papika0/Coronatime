@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,9 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
+
+Route::controller(EmailVerificationController::class)->middleware('auth')->group(function () {
+	Route::get('/email/verify', 'show')->name('verification.notice');
+	Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify')->middleware('signed');
 });
