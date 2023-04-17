@@ -3,8 +3,8 @@
     <x-form.header type='bold'>Welcome back</x-form.header>
     <x-form.header>Welcome back! Please enter your details</x-form.header>
 
-    <form class="flex flex-col gap-6 max-w-sm">
-
+    <form class="flex flex-col gap-6 max-w-sm" action="/login" method="POST">
+        @csrf
         <x-form.input name="email" label="Username" placeholder="Enter unique username or email" />
         <x-form.input name="password" type="password" label="Password" placeholder="Fill in password" />
 
