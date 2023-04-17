@@ -20,7 +20,7 @@
             Login
         </x-form.button>
         <footer>
-            <p class="text-sm text-center text-gray-450">Don't have an account? <a href="#"
+            <p class="text-sm text-center text-gray-450">Don't have an account? <a href="/register"
                     class="text-black font-bold hover:text-gray-700">Sign up for free</a></p>
         </footer>
     </form>
