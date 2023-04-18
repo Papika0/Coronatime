@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailVerificationController;
 
 /*
@@ -35,4 +36,11 @@ Route::middleware(['auth'])->group(function () {
 Route::controller(EmailVerificationController::class)->middleware('auth')->group(function () {
 	Route::get('/email/verify', 'show')->name('verification.notice');
 	Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify')->middleware('signed');
+});
+
+Route::controller(ResetPasswordController::class)->middleware('guest')->group(function () {
+	Route::get('/reset-password', 'show')->name('password.request_show');
+	Route::post('/reset-password', 'request')->name('password.request');
+	Route::get('/reset-password/{token}', 'showResetForm')->name('password.reset_show');
+	Route::post('/reset-password/{token}', 'reset')->name('password.reset');
 });
