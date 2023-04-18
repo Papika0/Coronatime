@@ -13,7 +13,7 @@ class LoginRequest extends FormRequest
 		];
 
 		if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-			$rules['email'] = ['required', 'email', 'exists:users,email'];
+			$rules['email'] = ['required', 'email', 'exists:users,email', 'min:3'];
 		} else {
 			$rules['email'] = ['required', 'exists:users,username'];
 		}

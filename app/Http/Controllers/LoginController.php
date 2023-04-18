@@ -12,6 +12,9 @@ class LoginController extends Controller
 {
 	public function show(): View
 	{
+		if (Auth::check()) {
+			return view('dashboard.welcome');
+		}
 		return view('auth.login');
 	}
 
@@ -35,6 +38,6 @@ class LoginController extends Controller
 
 		$request->session()->regenerate();
 
-		return redirect()->intended('/');
+		return redirect()->intended(route('home.index'));
 	}
 }
