@@ -10,6 +10,7 @@ class LoginRequest extends FormRequest
 	{
 		$rules = [
 			'password' => ['required'],
+			'remember' => ['nullable'],
 		];
 
 		if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {

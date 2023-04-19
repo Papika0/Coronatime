@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\View\View;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,6 @@ class LoginController extends Controller
 	public function login(LoginRequest $request): RedirectResponse
 	{
 		$credentials = $request->only(['password']);
-
 		$username = $request->email;
 
 		if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
@@ -30,7 +30,14 @@ class LoginController extends Controller
 			$credentials['username'] = $username;
 		}
 
-		if (!Auth::attempt($credentials)) {
+		$user = User::where('email', $username)
+			->orWhere('username', $username)
+			->first();
+		if (!$user->hasVerifiedEmail()) {
+			return redirect()->route('verification.notice');
+		}
+
+		if (!Auth::attempt($credentials, $request->has('remember'))) {
 			throw ValidationException::withMessages([
 				'email' => __('auth.failed'),
 			]);
