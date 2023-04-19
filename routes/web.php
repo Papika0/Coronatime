@@ -19,28 +19,28 @@ use App\Http\Controllers\EmailVerificationController;
 */
 Route::get('/', [LoginController::class, 'show'])->name('home.index');
 
-Route::controller(RegisterController::class)->group(function () {
-	Route::get('/register', 'show')->name('register.show');
-	Route::post('/register', 'register')->name('register');
+Route::controller(RegisterController::class)->prefix('register')->group(function () {
+	Route::get('/', 'show')->name('register.show');
+	Route::post('/', 'register')->name('register');
 });
 
-Route::controller(LoginController::class)->group(function () {
-	Route::get('/login', 'show')->name('login.show');
-	Route::post('/login', 'login')->name('login');
+Route::controller(LoginController::class)->prefix('login')->group(function () {
+	Route::get('/', 'show')->name('login.show');
+	Route::post('/', 'login')->name('login');
 });
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
-Route::controller(EmailVerificationController::class)->middleware('auth')->group(function () {
-	Route::get('/email/verify', 'show')->name('verification.notice');
-	Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify')->middleware('signed');
+Route::prefix('/email/verify')->controller(EmailVerificationController::class)->group(function () {
+	Route::get('/', 'show')->name('verification.notice');
+	Route::get('/{id}/{hash}', 'verify')->name('verification.verify')->middleware('signed');
 });
 
-Route::controller(ResetPasswordController::class)->middleware('guest')->group(function () {
-	Route::get('/reset-password', 'show')->name('password.request_show');
-	Route::post('/reset-password', 'request')->name('password.request');
-	Route::get('/reset-password/{token}', 'showResetForm')->name('password.reset_show');
-	Route::post('/reset-password/{token}', 'reset')->name('password.reset');
+Route::prefix('reset-password')->controller(ResetPasswordController::class)->middleware('guest')->group(function () {
+	Route::get('/', 'show')->name('password.request_show');
+	Route::post('/', 'request')->name('password.request');
+	Route::get('/{token}', 'showResetForm')->name('password.reset_show');
+	Route::post('/{token}', 'reset')->name('password.reset');
 });

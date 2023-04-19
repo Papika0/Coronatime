@@ -9,7 +9,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
@@ -52,10 +51,5 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	public function setPasswordAttribute($value)
 	{
 		$this->attributes['password'] = bcrypt($value);
-	}
-
-	public function sendPasswordResetNotification($token)
-	{
-		$this->notify(new ResetPasswordNotification($token));
 	}
 }
