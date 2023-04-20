@@ -8,6 +8,12 @@
     <title>Coronatime</title>
 </head>
 
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+</style>
+
 <body>
     {{ $slot }}
 

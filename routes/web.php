@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -43,4 +44,9 @@ Route::prefix('reset-password')->controller(ResetPasswordController::class)->mid
 	Route::post('/', 'request')->name('password.request');
 	Route::get('/{token}', 'showResetForm')->name('password.reset_show');
 	Route::post('/{token}', 'reset')->name('password.reset');
+});
+
+Route::middleware(['auth'])->controller(DashboardController::class)->group(function () {
+	Route::get('/dashboard', 'show')->name('dashboard.show');
+	Route::get('/dashboard/countries', 'showCountries')->name('dashboard.countries');
 });
