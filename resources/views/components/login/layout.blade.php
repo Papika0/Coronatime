@@ -1,7 +1,9 @@
 <x-layout>
     <header class="md:flex">
         <div class="md:mt-10 md:ml-5.5 md:w-3/5">
-            <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="md:w-44 md:h-12">
+            <a href="{{ route('home.index') }}">
+                <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="md:w-44 md:h-12">
+            </a>
             <div class="mt-16">
                 {{ $slot }}
             </div>
