@@ -14,7 +14,7 @@
             <input type="hidden" name="sort" value="{{ request('sort') }}">
         </form>
     </div>
-
+    {{-- TOO DO STLYE THE TABLE --}}
     <div
         class="max-h-[600px] mb-10 overflow-y-scroll border-collapse border border-table-border
          rounded-lg scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
@@ -31,7 +31,7 @@
                 @foreach ($countryStats as $countryStat)
                     <tr>
                         <td class="px-10 py-2 border-b border-table-border">
-                            {{ $countryStat->country }}
+                            {{ $countryStat->countryName->name }}
                         </td>
                         <td class="border-b border-table-border ">
                             {{ number_format($countryStat->confirmed) }}

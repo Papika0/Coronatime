@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CountryStats extends Model
 {
@@ -11,8 +11,8 @@ class CountryStats extends Model
 
 	protected $guarded = [];
 
-	public function country()
+	public function countryName()
 	{
-		return $this->belongsTo(Country::class, 'code', 'code');
+		return $this->belongsTo(Countries::class, 'code', 'code');
 	}
 }

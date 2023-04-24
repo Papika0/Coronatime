@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Countries extends Model
 {
@@ -13,6 +13,6 @@ class Countries extends Model
 
 	public function stats()
 	{
-		return $this->hasOne(CountryStat::class, 'code', 'code');
+		return $this->hasOne(CountryStats::class, 'code', 'code');
 	}
 }

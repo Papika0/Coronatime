@@ -15,15 +15,16 @@ class UpdateCountriesTable extends Command
 	public function handle()
 	{
 		$response = Http::get('https://devtest.ge/countries');
-		$countries = $response->json();
 
-		foreach ($countries as $country) {
-			DB::table('countries')
-				->updateOrInsert(
-					['code' => $country['code']],
-					['name'       => json_encode($country['name'])],
-				);
-		}
+		$insertData = collect($response->json())->map(function ($country) {
+			return ['code' => $country['code'],
+				'name'        => json_encode($country['name']),
+				'created_at'  => now(),
+				'updated_at'  => now(),
+			];
+		})->toArray();
+
+		DB::table('countries')->upsert($insertData, ['code'], ['name', 'created_at', 'updated_at']);
 
 		$this->info('Countries table updated successfully.');
 	}
