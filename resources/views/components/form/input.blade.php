@@ -16,7 +16,7 @@
 
      <div class="relative">
          <input class="{{ $inputClass }}" type="{{ $type }}" name="{{ $name }}" id="{{ $name }}"
-             placeholder="{{ $placeholder }}" {{ $attributes(['value' => old($name)]) }}>
+             placeholder="{{ __("guest.$placeholder") }}" {{ $attributes(['value' => old($name)]) }}>
 
          @if ($hasSuccess)
              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none w-5 h-5"
@@ -28,8 +28,10 @@
          @endif
      </div>
      @if ($bottom_label)
-         <label name="{{ $label }}" class="text-sm text-gray-450 px-1">Username should be unique, min 3 symbols
+         <label name="{{ $label }}"
+             class="text-sm text-gray-450 px-1">{{ __('guest.Username should be unique, min 3 symbols') }}
          </label>
      @endif
+
      <x-form.error name="{{ $name }}" />
  </div>

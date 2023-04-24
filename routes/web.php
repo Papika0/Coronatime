@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailVerificationController;
 
@@ -50,3 +51,5 @@ Route::middleware(['auth'])->controller(CountriesController::class)->group(funct
 	Route::get('/dashboard', 'show')->name('dashboard.show');
 	Route::get('/dashboard/countries', 'index')->name('countries.index');
 });
+
+Route::get('/set-locale/{locale}', [LocalizationController::class, 'setLanguage'])->name('set.locale');

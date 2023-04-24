@@ -2,8 +2,8 @@
     <div class="mt-9 mb-10">
         <form method="GET">
             <div class="relative">
-                <input type="text" id="search" name="search" placeholder="Search by country"
-                    class="border px-2 pl-14 h-10 w-60 outline-none rounded-lg" value="{{ request('search') }}">
+                <input type="text" id="search" name="search" placeholder="{{ __('dashboard.search') }}"
+                    class="border px-2 pl-12 h-10 w-60 outline-none rounded-lg" value="{{ request('search') }}">
                 <svg class="absolute top-0 left-0 h-5 w-5 ml-6 transform -translate-y-1/2 mt-5" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
