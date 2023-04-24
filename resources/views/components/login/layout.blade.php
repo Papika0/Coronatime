@@ -1,9 +1,12 @@
 <x-layout>
     <header class="md:flex">
         <div class="md:mt-10 md:ml-5.5 md:w-3/5">
-            <a href="{{ route('home.index') }}">
-                <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="md:w-44 md:h-12">
-            </a>
+            <div class="flex flex-row justify-between">
+                <a href="{{ route('home.index') }}">
+                    <img src="{{ asset('assets/images/logo.svg') }}" alt="Logo" class="md:w-44 md:h-12">
+                </a>
+                <x-dashboard.language-select />
+            </div>
             <div class="mt-16">
                 {{ $slot }}
             </div>

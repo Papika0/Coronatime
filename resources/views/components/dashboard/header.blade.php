@@ -7,18 +7,7 @@
         </a>
 
         <div class="flex flex-row gap-3 my-auto">
-            <select name="language" id="language" class="bg-transparent border-none outline-none"
-                onchange="location = this.value;">
-                <option value="" selected disabled hidden>
-                    @if (app()->getLocale() == 'en')
-                        {{ __('dashboard.english') }}
-                    @else
-                        {{ __('dashboard.georgian') }}
-                    @endif
-                </option>
-                <option value="{{ route('set.locale', 'en') }}">{{ __('dashboard.english') }}</option>
-                <option value="{{ route('set.locale', 'ka') }}">{{ __('dashboard.georgian') }}</option>
-            </select>
+            <x-dashboard.language-select />
             <p class="font-bold border-r border-gray-400 px-3"> {{ ucWords(Auth::user()->username) }} </p>
             <a href="{{ route('logout') }}" class="hover:text-gray-700">
                 <p> {{ __('dashboard.log out') }} </p>
