@@ -11,18 +11,20 @@
         <div class="flex justify-between">
             <div class="flex">
                 <input type="checkbox" name="remember" id="remember" class="mr-2">
-                <label for="remember" class="text-sm font-semibold">Remember this device</label>
+                <label for="remember" class="text-sm font-semibold">{{ __('guest.Remember this device') }}</label>
             </div>
             <a href="{{ route('password.request_show') }}"
-                class="text-sm font-semibold text-my-blue hover:text-blue-800">Forgot password?</a>
+                class="text-sm font-semibold text-my-blue hover:text-blue-800">{{ __('guest.Forgot password?') }}</a>
         </div>
 
         <x-form.button>
-            Login
+            {{ __('guest.Login') }}
         </x-form.button>
         <footer>
-            <p class="text-sm text-center text-gray-450">Don't have an account? <a href="{{ route('register.show') }}"
-                    class="text-black font-bold hover:text-gray-700">Sign up for free</a></p>
+            <p class="text-sm text-center text-gray-450"> {{ __("guest.Don't have an account?") }} <a
+                    href="{{ route('register.show') }}"
+                    class="text-black font-bold hover:text-gray-700">{{ __('guest.Sign up for free') }}</a>
+            </p>
         </footer>
     </form>
 
