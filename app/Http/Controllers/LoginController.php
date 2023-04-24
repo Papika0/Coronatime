@@ -11,10 +11,10 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-	public function show(): View
+	public function show(): RedirectResponse|View
 	{
 		if (Auth::check()) {
-			return view('dashboard.welcome');
+			return redirect()->route('dashboard.show');
 		}
 		return view('auth.login');
 	}

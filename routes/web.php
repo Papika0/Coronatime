@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailVerificationController;
 
@@ -43,4 +44,9 @@ Route::prefix('reset-password')->controller(ResetPasswordController::class)->mid
 	Route::post('/', 'request')->name('password.request');
 	Route::get('/{token}', 'showResetForm')->name('password.reset_show');
 	Route::post('/{token}', 'reset')->name('password.reset');
+});
+
+Route::middleware(['auth'])->controller(CountriesController::class)->group(function () {
+	Route::get('/dashboard', 'show')->name('dashboard.show');
+	Route::get('/dashboard/countries', 'index')->name('countries.index');
 });
