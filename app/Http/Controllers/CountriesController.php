@@ -6,7 +6,7 @@ use App\Models\CountryStats;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
-class DashboardController extends Controller
+class CountriesController extends Controller
 {
 	public function show(): View
 	{
