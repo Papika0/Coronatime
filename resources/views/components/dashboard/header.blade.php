@@ -26,8 +26,8 @@
             <a href="{{ route('dashboard.show') }}"
                 class="{{ request()->routeIs('dashboard.show') ? ' border-b-2 border-black absolute bottom-0 left-0 font-bold' : '' }} inline-block pb-4">
                 Worldwide </a>
-            <a href="{{ route('dashboard.countries') }}"
-                class="{{ request()->routeIs('dashboard.countries') ? 'border-b-2 border-black absolute bottom-0 left-0 font-bold' : '' }} inline-block pb-4 ml-40">
+            <a href="{{ route('countries.index') }}"
+                class="{{ request()->routeIs('countries.index') ? 'border-b-2 border-black absolute bottom-0 left-0 font-bold' : '' }} inline-block pb-4 ml-40">
                 By
                 country </a>
             <hr class="border border-solid border-gray-100">

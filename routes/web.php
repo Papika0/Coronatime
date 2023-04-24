@@ -48,5 +48,5 @@ Route::prefix('reset-password')->controller(ResetPasswordController::class)->mid
 
 Route::middleware(['auth'])->controller(DashboardController::class)->group(function () {
 	Route::get('/dashboard', 'show')->name('dashboard.show');
-	Route::get('/dashboard/countries', 'showCountries')->name('dashboard.countries');
+	Route::get('/dashboard/countries', 'index')->name('countries.index');
 });
