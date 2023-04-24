@@ -15,6 +15,7 @@ module.exports = {
         'my-blue': '#2029F3',
         'my-green': '#0FBA68',
         'my-yellow': '#EAD621',
+        'table-border': '#F6F6F7',
       },
       backgroundColor: {
         'blue-opacity-8': 'rgba(32, 41, 243, 0.08)',
@@ -23,5 +24,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
+  variants: {
+    scrollbar: ['rounded']
+}
 }
