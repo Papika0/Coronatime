@@ -30,4 +30,5 @@ return [
 	'Save Changes'                               => 'Save changes',
 	'Username should be unique, min 3 symbols'   => 'Username should be unique, min 3 symbols',
 	'Enter your email' 						                    => 'Enter your email',
+	'Your password has been updated successfully'=> 'Your password has been updated successfully',
 ];
