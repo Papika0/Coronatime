@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxHeight: {
+        '600': '600px',
+      },
       margin: {
         '5.5': '5.5%',
       },
