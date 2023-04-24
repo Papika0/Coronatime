@@ -17,19 +17,7 @@ class DashboardController extends Controller
 
 	public function index(Request $request): View
 	{
-		$sort = $request->sort;
-
-		$countryStats = CountryStats::select('country_stats.country', 'country_stats.confirmed', 'country_stats.deaths', 'country_stats.recovered', 'country_stats.code', 'countries.name')
-		->join('countries', 'countries.code', '=', 'country_stats.code')
-		->where(function ($query) use ($request) {
-			$query->where('countries.name->en', 'LIKE', "%$request->search%")
-				  ->orWhere('countries.name->ka', 'LIKE', "%$request->search%");
-		})
-		->when($sort, function ($query, $sort) {
-			[$column, $direction] = explode('_', $sort);
-			return $query->orderBy($column, $direction);
-		})
-		->get();
+		$countryStats = CountryStats::filter($request)->get();
 
 		return view('dashboard.countries', ['countryStats' => $countryStats]);
 	}
