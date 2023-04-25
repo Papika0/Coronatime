@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @variants responsive {
+    /* Customize the scrollbar style */
+    .scrollbar-slate-600::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    }
+    .scrollbar-slate-600::-webkit-scrollbar-track {
+    background: transparent;
+    }
+    .scrollbar-slate-600::-webkit-scrollbar-thumb {
+    background-color: #808189;
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    }
+    .scrollbar-slate-600::-webkit-scrollbar-thumb:hover {
+    background-color: #A0AEC0;
+    }
+    }
+    }
+    

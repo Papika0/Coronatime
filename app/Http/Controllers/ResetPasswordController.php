@@ -49,7 +49,7 @@ class ResetPasswordController extends Controller
 		);
 
 		return $status === Password::PASSWORD_RESET
-		? redirect()->route('login.show')->with('status', __($status))
+		? view('verify.password-updated')->with('status', __($status))
 		: back()->withErrors(['email' => [__($status)]]);
 	}
 }

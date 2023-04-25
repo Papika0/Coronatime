@@ -2,7 +2,7 @@
 
  <div>
      @php
-         $inputClass = 'text-md px-3 py-2 rounded-lg w-full placeholder-gray-450 focus:outline-none border border-gray-150 hover:border-blue-500 hover:shadow-blue-500';
+         $inputClass = 'text-md px-3 py-2 h-14 rounded-lg w-full placeholder-gray-450 focus:outline-none border border-gray-150 hover:border-blue-500 hover:shadow-blue-500';
          $inputValue = old($name);
          $hasError = $errors->has($name);
          $hasSuccess = $inputValue && !$hasError;

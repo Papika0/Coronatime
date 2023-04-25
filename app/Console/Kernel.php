@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
 	{
 		$schedule->command('auth:clear-resets')->everyFifteenMinutes();
 		$schedule->command('users:remove-unverified')->everyFifteenMinutes();
+		$schedule->command('countries:update')->daily();
+		$schedule->command('country-stats:update')->daily();
 	}
 
 	/**
