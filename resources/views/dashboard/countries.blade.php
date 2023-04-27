@@ -21,7 +21,8 @@
         <table class="w-full">
             <thead>
                 <tr>
-                    <x-dashboard.sort-header title="Location" column="country" padding="md:px-10 pl-4" />
+                    <x-dashboard.sort-header title="Location" column="{{ 'name.' . app()->getLocale() }}"
+                        padding="md:px-10 pl-4" />
                     <x-dashboard.sort-header title="New Cases" column="confirmed" />
                     <x-dashboard.sort-header title="Deaths" column="deaths" />
                     <x-dashboard.sort-header title="Recovered" column="recovered" width="" />
@@ -31,7 +32,7 @@
                 @foreach ($countryStats as $countryStat)
                     <tr>
                         <td class="md:pl-10 pl-4 py-2 border-b border-table-border">
-                            {{ $countryStat->countryName->name }}
+                            {{ $countryStat->name }}
                         </td>
                         <td class="border-b border-table-border ">
                             {{ number_format($countryStat->confirmed) }}

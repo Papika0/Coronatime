@@ -14,8 +14,25 @@ class Countries extends Model
 
 	public $translatable = ['name'];
 
-	public function stats()
+	public function scopeFilter($query, $request)
 	{
-		return $this->hasOne(CountryStats::class, 'code', 'code');
+		$search = $request->search;
+		$sort = $request->sort;
+
+		if ($search) {
+			$query->where('name->en', 'LIKE', "%$search%")
+				  ->orWhere('name->ka', 'LIKE', "%$search%");
+		}
+
+		if ($sort) {
+			[$column, $direction] = explode('_', $sort);
+			if (in_array($column, ['name.en', 'name.ka'])) {
+				$query->orderByRaw('JSON_EXTRACT(name, "$.' . str_replace('name.', '', $column) . '") ' . $direction);
+			} else {
+				$query->orderBy($column, $direction);
+			}
+		}
+
+		return $query;
 	}
 }

@@ -17,15 +17,46 @@ class UpdateCountriesTable extends Command
 		$response = Http::get('https://devtest.ge/countries');
 
 		$insertData = collect($response->json())->map(function ($country) {
-			return ['code' => $country['code'],
-				'name'        => json_encode($country['name']),
-				'created_at'  => now(),
-				'updated_at'  => now(),
+			return [
+				'code'       => $country['code'],
+				'name'       => json_encode($country['name']),
+				'created_at' => now(),
+				'updated_at' => now(),
 			];
-		})->toArray();
+		});
 
-		DB::table('countries')->upsert($insertData, ['code'], ['name', 'created_at', 'updated_at']);
+		$responses = Http::pool(function ($client) use ($insertData) {
+			return collect($insertData)->map(function ($country) use ($client) {
+				return $client->post('https://devtest.ge/get-country-statistics', [
+					'code' => $country['code'],
+				]);
+			});
+		});
 
-		$this->info('Countries table updated successfully.');
+		$stats = collect($responses)->map(function ($response, $index) use ($insertData) {
+			$country = $insertData[$index];
+
+			if ($response->ok()) {
+				$stat = $response->json();
+
+				return [
+					'code'       => $country['code'],
+					'name'       => $country['name'],
+					'confirmed'  => $stat['confirmed'],
+					'recovered'  => $stat['recovered'],
+					'critical'   => $stat['critical'],
+					'deaths'     => $stat['deaths'],
+					'created_at' => now(),
+					'updated_at' => now(),
+				];
+			} else {
+				$this->error('Failed to fetch stats.');
+				return null;
+			}
+		})->filter();
+
+		DB::table('countries')->upsert($stats->all(), ['code'], ['name', 'confirmed', 'recovered', 'critical', 'deaths', 'created_at', 'updated_at']);
+
+		$this->info('Data migrated successfully.');
 	}
 }

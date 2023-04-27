@@ -26,7 +26,7 @@ Route::controller(RegisterController::class)->prefix('register')->group(function
 	Route::post('/', 'register')->name('register');
 });
 
-Route::controller(LoginController::class)->prefix('login')->group(function () {
+Route::controller(LoginController::class)->prefix('login')->middleware('guest')->group(function () {
 	Route::get('/', 'show')->name('login.show');
 	Route::post('/', 'login')->name('login');
 });

@@ -12,8 +12,12 @@ return new class extends Migration {
 	{
 		Schema::create('countries', function (Blueprint $table) {
 			$table->id();
-			$table->string('code')->index();
+			$table->string('code')->unique();
 			$table->json('name');
+			$table->integer('confirmed')->nullable();
+			$table->integer('recovered')->nullable();
+			$table->integer('critical')->nullable();
+			$table->integer('deaths')->nullable();
 			$table->timestamps();
 		});
 	}
