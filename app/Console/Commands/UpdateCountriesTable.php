@@ -49,9 +49,6 @@ class UpdateCountriesTable extends Command
 					'created_at' => now(),
 					'updated_at' => now(),
 				];
-			} else {
-				$this->error('Failed to fetch stats.');
-				return null;
 			}
 		})->filter();
 
