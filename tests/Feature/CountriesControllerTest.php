@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Countries;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -17,7 +17,7 @@ class CountriesControllerTest extends TestCase
 		$user = User::factory()->create();
 		$this->actingAs($user);
 
-		$stats = Countries::factory()->create([
+		$stats = Country::factory()->create([
 			'confirmed' => 100,
 			'recovered' => 50,
 			'deaths'    => 10,
@@ -37,7 +37,7 @@ class CountriesControllerTest extends TestCase
 		$user = User::factory()->create();
 		$this->actingAs($user);
 
-		Countries::factory()->create()->count(2);
+		Country::factory()->create()->count(2);
 
 		$response = $this->get(route('countries.index'));
 
@@ -48,7 +48,7 @@ class CountriesControllerTest extends TestCase
 
 	public function test_countries_model()
 	{
-		$country = Countries::factory()->create([
+		$country = Country::factory()->create([
 			'name' => [
 				'en' => 'USA',
 				'ka' => 'აშშ',
@@ -56,7 +56,7 @@ class CountriesControllerTest extends TestCase
 			'confirmed' => 100,
 		]);
 
-		Countries::factory()->create([
+		Country::factory()->create([
 			'name' => [
 				'en' => 'GEO',
 				'ka' => 'საქართველო',
@@ -66,15 +66,15 @@ class CountriesControllerTest extends TestCase
 
 		// Test filter scope
 		$searchRequest = new Request(['search' => 'USA']);
-		$this->assertEquals(1, Countries::filter($searchRequest)->count());
+		$this->assertEquals(1, Country::filter($searchRequest)->count());
 
 		$sortRequest = new Request(['sort' => 'name.en_asc']);
-		$this->assertEquals(2, Countries::filter($sortRequest)->first()->id);
+		$this->assertEquals(2, Country::filter($sortRequest)->first()->id);
 
 		$sortRequest = new Request(['sort' => 'name.en_desc']);
-		$this->assertEquals($country->id, Countries::filter($sortRequest)->first()->id);
+		$this->assertEquals($country->id, Country::filter($sortRequest)->first()->id);
 
 		$sortRequest = new Request(['sort' => 'confirmed_asc']);
-		$this->assertEquals($country->id, Countries::filter($sortRequest)->first()->id);
+		$this->assertEquals($country->id, Country::filter($sortRequest)->first()->id);
 	}
 }
