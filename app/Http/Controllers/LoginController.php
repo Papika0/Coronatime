@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\View\View;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-	public function show(): RedirectResponse|View
+	public function showHome(): RedirectResponse
 	{
-		if (Auth::check()) {
-			return redirect()->route('dashboard.show');
-		}
+		return redirect()->route('dashboard.show');
+	}
+
+	public function show(): View
+	{
 		return view('auth.login');
 	}
 
