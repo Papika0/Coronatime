@@ -33,7 +33,7 @@
 ### Getting Started
 1\. First of all you need to clone E Space repository from github:
 ```sh
-git clone https://github.com/RedberryInternship/dato-papismedovi-movie-quotes.git
+git clone https://github.com/RedberryInternship/dato-papismedovi-coronatime.git
 ```
 
 2\. Next step requires you to run *composer install* in order to install all the dependencies.
