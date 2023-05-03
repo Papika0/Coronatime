@@ -98,8 +98,7 @@ class LoginTest extends TestCase
 	{
 		$response = $this->get(route('home.index'));
 
-		$response->assertStatus(200);
-		$response->assertViewIs('auth.login');
+		$response->assertRedirect(route('login.show'));
 	}
 
 	public function test_authenticated_user_redirected_to_dashboard()

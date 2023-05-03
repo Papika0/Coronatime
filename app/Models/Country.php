@@ -20,8 +20,12 @@ class Country extends Model
 		$sort = $request->sort;
 
 		if ($search) {
-			$query->where('name->en', 'LIKE', "%$search%")
-				  ->orWhere('name->ka', 'LIKE', "%$search%");
+			$searchFields = ['name->en', 'name->ka'];
+			$query->where(function ($query) use ($searchFields, $search) {
+				foreach ($searchFields as $field) {
+					$query->orWhere($field, 'LIKE', "%$search%");
+				}
+			});
 		}
 
 		if ($sort) {
