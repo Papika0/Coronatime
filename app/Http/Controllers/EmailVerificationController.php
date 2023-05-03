@@ -16,13 +16,10 @@ class EmailVerificationController extends Controller
 
 	public function verify(Request $request): View
 	{
-		$id = $request->route('id');
-		$hash = $request->route('hash');
+		$user = User::findOrFail($request->id);
 
-		$user = User::findOrFail($id);
-
-		if (!hash_equals((string) $user->getKey(), (string) $id) ||
-			!hash_equals(sha1($user->getEmailForVerification()), (string) $hash)) {
+		if (!hash_equals((string) $user->getKey(), (string) $request->id) ||
+			!hash_equals(sha1($user->getEmailForVerification()), (string) $request->hash)) {
 			abort(403);
 		}
 

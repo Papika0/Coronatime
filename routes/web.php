@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LocalizationController;
@@ -46,8 +45,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/', [LoginController::class, 'showHome'])->name('home.index');
-
-	Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 	Route::controller(CountryController::class)->group(function () {
 		Route::get('/dashboard', 'show')->name('dashboard.show');
