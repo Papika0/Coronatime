@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -48,5 +49,14 @@ class LoginController extends Controller
 		$request->session()->regenerate();
 
 		return redirect()->intended(route('dashboard.show'));
+	}
+
+	public function logout(): RedirectResponse
+	{
+		Session::flush();
+
+		Auth::logout();
+
+		return redirect('login');
 	}
 }

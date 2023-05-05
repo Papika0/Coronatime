@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 
 class LocalizationController extends Controller
 {
-	public function setLanguage($locale): RedirectResponse
+	public function setLanguage(string $locale): RedirectResponse
 	{
 		App::setLocale($locale);
 		session()->put('locale', $locale);

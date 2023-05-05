@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LocalizationController;
@@ -37,8 +36,8 @@ Route::middleware('guest')->group(function () {
 	});
 
 	Route::prefix('reset-password')->controller(ResetPasswordController::class)->group(function () {
-		Route::get('/', 'show')->name('password.request_show');
-		Route::post('/', 'request')->name('password.request');
+		Route::get('/', 'show')->name('password.send_reset_link_show');
+		Route::post('/', 'sendResetLink')->name('password.send_reset_link');
 		Route::get('/{token}', 'showResetForm')->name('password.reset_show');
 		Route::post('/{token}', 'reset')->name('password.reset');
 	});
@@ -46,8 +45,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/', [LoginController::class, 'showHome'])->name('home.index');
-
-	Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 	Route::controller(CountryController::class)->group(function () {
 		Route::get('/dashboard', 'show')->name('dashboard.show');

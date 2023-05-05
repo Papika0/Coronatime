@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use App\Http\Requests\CountryRequest;
 
 class CountryController extends Controller
 {
@@ -15,7 +15,7 @@ class CountryController extends Controller
 		return view('dashboard.worldwide', ['stats' => $stats]);
 	}
 
-	public function index(Request $request): View
+	public function index(CountryRequest $request): View
 	{
 		$countryStats = Country::filter($request)->get();
 
