@@ -13,7 +13,7 @@
                 <input type="checkbox" name="remember" id="remember" class="mr-2">
                 <label for="remember" class="text-sm font-semibold">{{ __('guest.Remember this device') }}</label>
             </div>
-            <a href="{{ route('password.request_show') }}"
+            <a href="{{ route('password.send_reset_link_show') }}"
                 class="text-sm font-semibold text-my-blue hover:text-blue-800">{{ __('guest.Forgot password?') }}</a>
         </div>
 

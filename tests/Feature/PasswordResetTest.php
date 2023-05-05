@@ -19,13 +19,13 @@ class PasswordResetTest extends TestCase
 
 	public function test_if_password_reset_is_accessable()
 	{
-		$response = $this->get(route('password.request_show'));
+		$response = $this->get(route('password.send_reset_link_show'));
 		$response->assertStatus(200);
 	}
 
 	public function test_if_email_is_required()
 	{
-		$response = $this->post(route('password.request'), [
+		$response = $this->post(route('password.send_reset_link'), [
 			'email' => '',
 		]);
 
@@ -34,7 +34,7 @@ class PasswordResetTest extends TestCase
 
 	public function test_if_email_is_valid()
 	{
-		$response = $this->post(route('password.request'), [
+		$response = $this->post(route('password.send_reset_link'), [
 			'email' => 'invalid-email',
 		]);
 
@@ -47,7 +47,7 @@ class PasswordResetTest extends TestCase
 
 		$user = User::factory()->create();
 
-		$response = $this->post(route('password.request'), [
+		$response = $this->post(route('password.send_reset_link'), [
 			'email' => $user->email,
 		]);
 
@@ -115,7 +115,7 @@ class PasswordResetTest extends TestCase
 	{
 		Notification::fake(ResetPassword::class);
 		$user = User::factory()->create();
-		$response = $this->post(route('password.request'), ['email' => $user->email]);
+		$response = $this->post(route('password.send_reset_link'), ['email' => $user->email]);
 		$response->assertViewIs('verify.email-send');
 		Notification::assertSentTo(
 			$user,

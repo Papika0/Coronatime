@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\PasswordResetRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\SendPasswordResetLinkRequest;
 
 class ResetPasswordController extends Controller
 {
@@ -18,11 +18,10 @@ class ResetPasswordController extends Controller
 		return view('auth.forgot-password');
 	}
 
-	public function request(Request $request): View|RedirectResponse
+	public function sendResetLink(SendPasswordResetLinkRequest $request): View|RedirectResponse
 	{
-		$request->validate(['email' => 'required|email|exists:users,email']);
 		$status = Password::sendResetLink(
-			$request->only('email')
+			$request->validated()
 		);
 
 		return $status === Password::RESET_LINK_SENT
@@ -30,7 +29,7 @@ class ResetPasswordController extends Controller
 		: back()->withErrors(['email' => __($status)]);
 	}
 
-	public function showResetForm(Request $request, $token = null): View
+	public function showResetForm(SendPasswordResetLinkRequest $request, $token = null): View
 	{
 		return view('auth.reset-password', ['token' => $token, 'email' => $request->email]);
 	}

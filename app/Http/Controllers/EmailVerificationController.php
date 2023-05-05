@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
+use App\Http\Requests\VerifyEmailRequest;
 
 class EmailVerificationController extends Controller
 {
@@ -14,7 +14,7 @@ class EmailVerificationController extends Controller
 		return view('verify.email-send');
 	}
 
-	public function verify(Request $request): View
+	public function verify(VerifyEmailRequest $request): View
 	{
 		$user = User::findOrFail($request->id);
 
